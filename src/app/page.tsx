@@ -7,7 +7,6 @@ import CommandBar from "@/components/CommandBar";
 import QuickActions from "@/components/QuickActions";
 import HighlightsCarousel from "@/components/HighlightsCarousel";
 import SmartInsightsSection from "@/components/SmartInsightsSection";
-import NeedsAttentionCard from "@/components/NeedsAttentionCard";
 import ConsumerLoanSection from "@/components/ConsumerLoanSection";
 import SavingsSection from "@/components/SavingsSection";
 import UpcomingBillsCard from "@/components/UpcomingBillsCard";
@@ -73,12 +72,7 @@ export default function HomePage() {
               <BalanceCard privacyMode={privacyMode} />
             </div>
 
-            {/* Row 4 — Needs Attention: full width */}
-            <div className="col-12">
-              <NeedsAttentionCard />
-            </div>
-
-            {/* Row 5 — Smart Insights (wide) + Upcoming Bills (narrow) */}
+            {/* Row 4 — Smart Insights (wide) + Upcoming Bills (narrow) */}
             <div className="col-8">
               <SmartInsightsSection />
             </div>
