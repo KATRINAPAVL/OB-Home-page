@@ -11,12 +11,12 @@ export default function BalanceCard({ privacyMode }: Props) {
   const totalInvestments = mockNetWorth.breakdown.find(b => b.label === "Investments")?.value ?? 0;
 
   const fmt = (v: number) =>
-    privacyMode ? "••••••" : `€${v.toLocaleString("lv-LV", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    privacyMode ? "••••••" : `${v < 0 ? "-" : ""}€${Math.abs(v).toLocaleString("lv-LV", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   const sections = [
     { label: "Total Balance", value: totalBalance, color: "var(--text-primary)" },
     { label: "Total Savings", value: totalSavings, color: "#15803d" },
-    { label: "Total Loans Balance", value: totalLoans, color: "#d97706" },
+    { label: "Total Loans Balance", value: -totalLoans, color: "#d97706" },
     { label: "Total Investments", value: totalInvestments, color: "var(--text-primary)" },
   ];
 
