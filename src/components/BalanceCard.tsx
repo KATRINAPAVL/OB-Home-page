@@ -66,20 +66,6 @@ export default function BalanceCard({ privacyMode }: Props) {
           ))}
         </div>
 
-        {/* Quick pay CTA */}
-        <div style={{
-          display: "flex", alignItems: "center", padding: "14px 20px",
-          borderLeft: "1px solid var(--border-light)",
-          gap: 8, flexShrink: 0,
-        }}>
-          <button className="btn-primary" style={{ fontSize: 13, padding: "8px 16px", whiteSpace: "nowrap" }}>
-            New payment
-          </button>
-          <button className="btn-outline" style={{ fontSize: 13, padding: "8px 16px", whiteSpace: "nowrap" }}>
-            Move money
-          </button>
-        </div>
-
       </div>
     </div>
   );
