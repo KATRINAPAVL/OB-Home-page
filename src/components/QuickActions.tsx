@@ -43,6 +43,16 @@ const ALL_ACTIONS: Action[] = [
     ),
   },
   {
+    id: "request-money",
+    label: "Request money",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
+        <path d="M13 18V8M9 14l4 4 4-4" stroke="#e3002c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
     id: "accounts",
     label: "Accounts & cards",
     icon: (

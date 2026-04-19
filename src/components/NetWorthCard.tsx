@@ -40,9 +40,28 @@ export default function NetWorthCard({ privacyMode }: Props) {
           );
         })}
 
-        <span className="link-red" style={{ display: "block", marginTop: 6, fontSize: 12 }}>
-          + Connect external account →
-        </span>
+        {/* Open Banking CTA — Embedded Connected Ecosystems */}
+        <div style={{
+          marginTop: 10, padding: "9px 12px",
+          background: "var(--bg)", border: "1px dashed var(--border)",
+          borderRadius: "var(--radius)", cursor: "pointer",
+          display: "flex", alignItems: "center", gap: 8,
+          transition: "border-color 0.15s",
+        }}
+          onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--red)")}
+          onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--border)")}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+          </svg>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)" }}>Connect external accounts</div>
+            <div style={{ fontSize: 11, color: "var(--text-muted)" }}>Open Banking — see all assets in one place</div>
+          </div>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { Eye, EyeOff, Search } from "lucide-react";
-import { mockUser } from "@/lib/data";
+import { mockUser, mockLastLogin } from "@/lib/data";
 
 interface TopBarProps {
   privacyMode: boolean;
@@ -26,24 +26,32 @@ export default function TopBar({ privacyMode, onTogglePrivacy, onOpenCommand }: 
       }}
     >
       {/* User selector */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          cursor: "pointer",
-          color: "var(--text-primary)",
-          fontSize: 14,
-          fontWeight: 500,
-        }}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-        </svg>
-        {mockUser.name}
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
+      <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            cursor: "pointer",
+            color: "var(--text-primary)",
+            fontSize: 14,
+            fontWeight: 500,
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+          {mockUser.name}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div style={{ fontSize: 11, color: "var(--text-muted)", paddingLeft: 22, display: "flex", alignItems: "center", gap: 4 }}>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Last login: {mockLastLogin}
+        </div>
       </div>
 
       {/* Search / Command bar trigger */}

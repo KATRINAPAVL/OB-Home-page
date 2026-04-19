@@ -1,15 +1,26 @@
 "use client";
 
-import { mockAccounts } from "@/lib/data";
+import { mockAccounts, mockUpcomingBills } from "@/lib/data";
 
 interface Props { privacyMode: boolean; }
+
+// Bills due within 14 days are factored into "safe to spend"
+const PAYDAY_DAYS = 8;
 
 export default function BalanceCard({ privacyMode }: Props) {
   const totalBalance = mockAccounts.reduce((s, a) => s + a.balance, 0);
   const totalAvailable = mockAccounts.reduce((s, a) => s + a.available, 0);
+  const committed = mockUpcomingBills
+    .filter(b => b.daysLeft <= 14)
+    .reduce((s, b) => s + b.amount, 0);
+  const safeToSpend = Math.max(0, totalAvailable - committed);
+  const safeToSpendPct = Math.round((safeToSpend / totalAvailable) * 100);
 
   const fmt = (v: number) =>
     privacyMode ? "••••••" : `€${v.toLocaleString("lv-LV", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+  const fmtShort = (v: number) =>
+    privacyMode ? "••••" : `€${v.toFixed(0)}`;
 
   return (
     <div className="section-card" style={{ overflow: "visible" }}>
@@ -31,6 +42,34 @@ export default function BalanceCard({ privacyMode }: Props) {
               {fmt(totalAvailable)}
             </span>
           </span>
+        </div>
+
+        {/* Safe to spend meter — Contextual/Predictive Banking */}
+        <div style={{
+          padding: "14px 20px", borderRight: "1px solid var(--border-light)",
+          display: "flex", flexDirection: "column", justifyContent: "center", gap: 6, minWidth: 190,
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span style={{ fontSize: 11, fontWeight: 500, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Safe to spend
+            </span>
+            <span style={{ fontSize: 10, color: "var(--text-muted)" }}>{PAYDAY_DAYS}d to payday</span>
+          </div>
+          <span className={privacyMode ? "blurred" : ""} style={{ fontSize: 20, fontWeight: 700, color: safeToSpend < 500 ? "#d97706" : "#15803d", lineHeight: 1 }}>
+            {fmt(safeToSpend)}
+          </span>
+          <div>
+            <div className="progress-bar" style={{ height: 5, marginBottom: 4 }}>
+              <div className="progress-fill" style={{
+                width: `${safeToSpendPct}%`,
+                background: safeToSpend < 500 ? "#d97706" : "#15803d",
+              }} />
+            </div>
+            <div style={{ fontSize: 10, color: "var(--text-muted)", display: "flex", justifyContent: "space-between" }}>
+              <span>{fmtShort(committed)} committed</span>
+              <span>{safeToSpendPct}% free</span>
+            </div>
+          </div>
         </div>
 
         {/* Per-account breakdown */}

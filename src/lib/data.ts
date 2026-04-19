@@ -54,6 +54,7 @@ export const mockNudges = [
   { id: "n1", icon: "📅", title: "Loan payment due in 3 days", body: "Consumer loan payment of €215.00 is due on 01.02.2025.", cta: "Pay now", color: "#e3002c" },
   { id: "n2", icon: "🔍", title: "Unusual charge detected", body: "Wolt charge of €19.90 is 60% higher than your usual average.", cta: "Review", color: "#676973" },
   { id: "n3", icon: "🎯", title: "Holiday fund at 78%", body: "€780 more to reach your €3,600 holiday goal by July.", cta: "Top up", color: "#e3002c" },
+  { id: "n4", icon: "🍽️", title: "Dining spend up 20% this month", body: "You've spent €74.90 on Food & Drink — 20% above your monthly average of €62. Consider setting a dining budget.", cta: "Set budget", color: "#d97706" },
 ];
 
 export const mockUpcomingBills = [
@@ -84,7 +85,16 @@ export const mockFinancialHealth = {
   ],
 };
 
-export const mockESG = { carbonKg: 48, budget: 80, changeVsLast: -12 };
+export const mockCRewards = {
+  points: 8796,
+  tier: "Silver",
+  nextTier: "Gold",
+  pointsToNext: 1204,
+  expiringPoints: 350,
+  expiringDate: "28.02.2025",
+};
+
+export const mockLastLogin = "Today 08:42 from Riga, LV";
 
 export const mockNetWorth = {
   total: 7420.66,
