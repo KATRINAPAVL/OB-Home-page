@@ -80,17 +80,17 @@ export default function HomePage() {
               <UpcomingBillsCard privacyMode={privacyMode} />
             </div>
 
-            {/* Row 5 — 4 equal blocks: Loans · C Rewards · Savings · Savings Goals */}
-            <div className="col-3">
+            {/* Row 5 — 2×2 grid: Loans · C Rewards / Savings · Savings Goals */}
+            <div className="col-6">
               <ConsumerLoanSection privacyMode={privacyMode} />
             </div>
-            <div className="col-3">
+            <div className="col-6">
               <CRewardsCard />
             </div>
-            <div className="col-3">
+            <div className="col-6">
               <SavingsSection privacyMode={privacyMode} />
             </div>
-            <div className="col-3">
+            <div className="col-6">
               <SavingsGoalsCard privacyMode={privacyMode} />
             </div>
 
