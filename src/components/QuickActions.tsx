@@ -54,6 +54,27 @@ const ALL_ACTIONS: Action[] = [
     ),
   },
   {
+    id: "transactions",
+    label: "Transactions",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
+        <path d="M8 9h10M8 13h7M8 17h5" stroke="#e3002c" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    id: "subscriptions",
+    label: "Subscriptions",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
+        <rect x="8" y="8" width="10" height="10" rx="2" stroke="#e3002c" strokeWidth="2"/>
+        <path d="M10 13l2 2 4-4" stroke="#e3002c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
     id: "request-money",
     label: "Request money",
     icon: (
@@ -176,7 +197,7 @@ const ALL_ACTIONS: Action[] = [
   },
 ];
 
-const DEFAULT_ACTION_IDS = ["payment", "order", "search-tx", "move-money"];
+const DEFAULT_ACTION_IDS = ["payment", "order", "search-tx", "move-money", "transactions", "subscriptions"];
 
 export default function QuickActions() {
   const [activeIds, setActiveIds] = useState<string[]>(DEFAULT_ACTION_IDS);

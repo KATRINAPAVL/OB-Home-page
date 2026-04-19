@@ -9,11 +9,8 @@ import HighlightsCarousel from "@/components/HighlightsCarousel";
 import SmartInsightsSection from "@/components/SmartInsightsSection";
 import AccountsSection from "@/components/AccountsSection";
 import ConsumerLoanSection from "@/components/ConsumerLoanSection";
-import TransactionsCard from "@/components/TransactionsCard";
 import UpcomingBillsCard from "@/components/UpcomingBillsCard";
 import SavingsGoalsCard from "@/components/SavingsGoalsCard";
-import SubscriptionsCard from "@/components/SubscriptionsCard";
-import NetWorthCard from "@/components/NetWorthCard";
 import PromoBanner from "@/components/PromoBanner";
 import BalanceCard from "@/components/BalanceCard";
 import CRewardsCard from "@/components/CRewardsCard";
@@ -91,27 +88,16 @@ export default function HomePage() {
               <SavingsGoalsCard privacyMode={privacyMode} />
             </div>
 
-            {/* Row 5 — Transactions (wide) + Subscriptions (narrow) */}
-            <div className="col-8">
-              <TransactionsCard privacyMode={privacyMode} />
-            </div>
-            <div className="col-4">
-              <SubscriptionsCard privacyMode={privacyMode} />
-            </div>
-
             {/* Row 6 — Lending: full width */}
             <div className="col-12">
               <ConsumerLoanSection privacyMode={privacyMode} />
             </div>
 
-            {/* Row 7 — Net Worth (4) + C REWARDS (4) + Promo (4) */}
-            <div className="col-4">
-              <NetWorthCard privacyMode={privacyMode} />
-            </div>
-            <div className="col-4">
+            {/* Row 7 — C REWARDS + Promo */}
+            <div className="col-6">
               <CRewardsCard />
             </div>
-            <div className="col-4">
+            <div className="col-6">
               <PromoBanner />
             </div>
 
