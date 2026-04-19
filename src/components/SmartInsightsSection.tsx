@@ -12,9 +12,6 @@ export default function SmartInsightsSection() {
   return (
     <div className="section-card" style={{ marginBottom: 10 }}>
       <div className="section-header" style={{ cursor: "default" }}>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2">
-          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
         <span>Smart Insights</span>
         <span style={{
           marginLeft: 8, fontSize: 11, background: "var(--red)", color: "#fff",
@@ -33,7 +30,6 @@ export default function SmartInsightsSection() {
               borderTop: i > 0 ? "1px solid var(--border-light)" : "none",
             }}
           >
-            <span style={{ fontSize: 18, flexShrink: 0, marginTop: 1 }}>{n.icon}</span>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)", marginBottom: 2 }}>{n.title}</div>
               <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>{n.body}</div>

@@ -23,7 +23,6 @@ export default function UpcomingBillsCard({ privacyMode }: Props) {
             onMouseEnter={e => (e.currentTarget.style.background = "var(--bg)")}
             onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
           >
-            <span style={{ fontSize: 20, flexShrink: 0 }}>{bill.logo}</span>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)" }}>{bill.name}</div>
               <div style={{ fontSize: 11, fontWeight: 600, color: urgencyColor(bill.daysLeft) }}>

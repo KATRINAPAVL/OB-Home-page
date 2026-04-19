@@ -44,15 +44,6 @@ export default function TransactionsCard({ privacyMode }: Props) {
             onMouseEnter={e => (e.currentTarget.style.background = "var(--bg)")}
             onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
           >
-            <div style={{
-              width: 34, height: 34, borderRadius: 8,
-              background: tx.amount > 0 ? "rgba(21,128,61,0.08)" : "var(--bg)",
-              border: "1px solid var(--border-light)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 16, flexShrink: 0,
-            }}>
-              {tx.logo}
-            </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{tx.merchant}</div>
               <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{tx.category} · {tx.date}</div>
