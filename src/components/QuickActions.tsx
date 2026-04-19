@@ -11,7 +11,7 @@ interface Action {
 const ALL_ACTIONS: Action[] = [
   {
     id: "payment",
-    label: "New payment",
+    label: "Make payment",
     icon: (
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
@@ -21,7 +21,7 @@ const ALL_ACTIONS: Action[] = [
   },
   {
     id: "order",
-    label: "New order",
+    label: "Create order",
     icon: (
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
@@ -39,6 +39,17 @@ const ALL_ACTIONS: Action[] = [
         <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
         <circle cx="11.5" cy="11.5" r="4" stroke="#e3002c" strokeWidth="2"/>
         <path d="M14.5 14.5l3 3" stroke="#e3002c" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    id: "move-money",
+    label: "Move money",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
+        <path d="M8 10h10M15 7l3 3-3 3" stroke="#e3002c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M18 16H8M11 13l-3 3 3 3" stroke="#e3002c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
@@ -165,7 +176,7 @@ const ALL_ACTIONS: Action[] = [
   },
 ];
 
-const DEFAULT_ACTION_IDS = ["payment", "order", "search-tx"];
+const DEFAULT_ACTION_IDS = ["payment", "order", "search-tx", "move-money"];
 
 export default function QuickActions() {
   const [activeIds, setActiveIds] = useState<string[]>(DEFAULT_ACTION_IDS);
