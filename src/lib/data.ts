@@ -1,6 +1,6 @@
 export const mockUser = {
-  name: "Name Surname",
-  firstName: "Name",
+  name: "Katrīna Pavlovska",
+  firstName: "Katrīna",
 };
 
 export const mockDate = "26.01.2025 14:32";
