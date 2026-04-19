@@ -20,8 +20,20 @@ const ALL_ACTIONS: Action[] = [
     ),
   },
   {
+    id: "order",
+    label: "New order",
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
+        <rect x="8" y="9" width="10" height="9" rx="1" stroke="#e3002c" strokeWidth="2"/>
+        <path d="M10 12h6M10 15h4" stroke="#e3002c" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M11 9V7.5a2 2 0 014 0V9" stroke="#e3002c" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
     id: "search-tx",
-    label: "Search Transaction",
+    label: "Search transaction",
     icon: (
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="13" fill="#e3002c" opacity="0.1"/>
@@ -143,24 +155,13 @@ const ALL_ACTIONS: Action[] = [
   },
 ];
 
-const DEFAULT_ACTION_IDS = ["payment", "search-tx", "accounts", "payments-list", "loans", "savings", "investments", "order-card"];
+const DEFAULT_ACTION_IDS = ["payment", "order", "search-tx"];
 
 export default function QuickActions() {
   const [activeIds, setActiveIds] = useState<string[]>(DEFAULT_ACTION_IDS);
   const [showPicker, setShowPicker] = useState(false);
-  const [scrollPos, setScrollPos] = useState(0);
 
   const activeActions = ALL_ACTIONS.filter(a => activeIds.includes(a.id));
-  const ITEM_W = 88;
-  const VISIBLE_W = typeof window !== "undefined" ? window.innerWidth - 400 : 900;
-  const maxScroll = Math.max(0, activeActions.length * ITEM_W - VISIBLE_W + 120);
-
-  const scroll = (dir: "left" | "right") => {
-    setScrollPos(p => {
-      const next = dir === "right" ? p + ITEM_W * 3 : p - ITEM_W * 3;
-      return Math.max(0, Math.min(next, maxScroll));
-    });
-  };
 
   const toggleAction = (id: string) => {
     setActiveIds(prev =>
@@ -170,93 +171,71 @@ export default function QuickActions() {
 
   return (
     <>
-      <div className="section-card" style={{ overflow: "visible", position: "relative" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-          {/* Left arrow */}
-          <button
-            onClick={() => scroll("left")}
-            style={{
-              flexShrink: 0, width: 32, height: "100%", minHeight: 108,
-              background: scrollPos > 0 ? "var(--white)" : "transparent",
-              border: "none", borderRight: scrollPos > 0 ? "1px solid var(--border-light)" : "none",
-              cursor: scrollPos > 0 ? "pointer" : "default",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: scrollPos > 0 ? "var(--text-secondary)" : "transparent",
-              borderRadius: "var(--radius) 0 0 var(--radius)",
-              transition: "all 0.15s",
-            }}
-            aria-label="Scroll left"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+      <div className="section-card">
+        <div style={{ display: "flex", alignItems: "stretch" }}>
 
-          {/* Scrollable actions */}
-          <div style={{ flex: 1, overflow: "hidden" }}>
+          {activeActions.map((action, i) => (
+            <button
+              key={action.id}
+              style={{
+                flex: 1,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                gap: 8, padding: "18px 12px",
+                background: "none", border: "none",
+                borderLeft: i > 0 ? "1px solid var(--border-light)" : "none",
+                cursor: "pointer", fontFamily: "inherit",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "var(--bg)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+            >
+              <div style={{
+                width: 48, height: 48, borderRadius: "50%",
+                background: "rgba(227,0,44,0.07)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                {action.icon}
+              </div>
+              <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-primary)", textAlign: "center", lineHeight: 1.3 }}>
+                {action.label}
+              </span>
+            </button>
+          ))}
+
+          {/* Customize button — gray, always last */}
+          <button
+            onClick={() => setShowPicker(true)}
+            style={{
+              width: 100, flexShrink: 0,
+              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+              gap: 8, padding: "18px 12px",
+              background: "none", border: "none",
+              borderLeft: "1px solid var(--border-light)",
+              cursor: "pointer", fontFamily: "inherit",
+              transition: "background 0.15s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "var(--bg)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+            aria-label="Customize quick actions"
+          >
             <div style={{
-              display: "flex",
-              transform: `translateX(-${scrollPos}px)`,
-              transition: "transform 0.25s ease",
-              padding: "14px 8px",
-              gap: 4,
-            }}>
-              {activeActions.map(action => (
-                <ActionItem key={action.id} action={action} />
-              ))}
-              {/* Add/Customize button */}
-              <button
-                onClick={() => setShowPicker(true)}
-                style={{
-                  flexShrink: 0, width: 80, minWidth: 80,
-                  display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                  gap: 8, padding: "10px 4px",
-                  background: "none", border: "1.5px dashed var(--border)",
-                  borderRadius: 8, cursor: "pointer", color: "var(--text-muted)",
-                  transition: "all 0.15s",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "var(--red)";
-                  e.currentTarget.style.color = "var(--red)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.color = "var(--text-muted)";
-                }}
-                aria-label="Customize quick actions"
-              >
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                  <circle cx="11" cy="11" r="9" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M11 7v8M7 11h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-                <span style={{ fontSize: 10, fontWeight: 500, textAlign: "center", lineHeight: 1.2 }}>Customize</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Right arrow */}
-          <button
-            onClick={() => scroll("right")}
-            style={{
-              flexShrink: 0, width: 32, height: "100%", minHeight: 108,
-              background: "var(--white)",
-              border: "none", borderLeft: "1px solid var(--border-light)",
-              cursor: "pointer",
+              width: 48, height: 48, borderRadius: "50%",
+              background: "var(--bg)",
+              border: "1.5px dashed var(--border)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              color: "var(--text-secondary)",
-              borderRadius: "0 var(--radius) var(--radius) 0",
-              transition: "all 0.15s",
-            }}
-            aria-label="Scroll right"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            }}>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 4v12M4 10h12" stroke="var(--text-muted)" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <span style={{ fontSize: 12, fontWeight: 500, color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>
+              Customize
+            </span>
           </button>
+
         </div>
       </div>
 
-      {/* Picker modal */}
       {showPicker && (
         <ActionPicker
           allActions={ALL_ACTIONS}
@@ -266,36 +245,6 @@ export default function QuickActions() {
         />
       )}
     </>
-  );
-}
-
-function ActionItem({ action }: { action: Action }) {
-  return (
-    <button
-      style={{
-        flexShrink: 0, width: 80, minWidth: 80,
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",
-        gap: 8, padding: "10px 4px",
-        background: "none", border: "none",
-        borderRadius: 8, cursor: "pointer",
-        transition: "background 0.15s",
-        textAlign: "center",
-      }}
-      onMouseEnter={e => (e.currentTarget.style.background = "var(--bg)")}
-      onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-    >
-      <div style={{
-        width: 48, height: 48, borderRadius: "50%",
-        background: "rgba(227,0,44,0.07)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        flexShrink: 0,
-      }}>
-        {action.icon}
-      </div>
-      <span style={{ fontSize: 11, fontWeight: 500, color: "var(--text-primary)", lineHeight: 1.3 }}>
-        {action.label}
-      </span>
-    </button>
   );
 }
 
