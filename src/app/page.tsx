@@ -18,6 +18,7 @@ import SecurityCard from "@/components/SecurityCard";
 import NetWorthCard from "@/components/NetWorthCard";
 import ESGCard from "@/components/ESGCard";
 import PromoBanner from "@/components/PromoBanner";
+import BalanceCard from "@/components/BalanceCard";
 import { mockUser, mockDate } from "@/lib/data";
 
 export default function HomePage() {
@@ -71,7 +72,12 @@ export default function HomePage() {
               <HighlightsCarousel />
             </div>
 
-            {/* Row 3 — Smart Insights (wide) + Upcoming Bills (narrow) */}
+            {/* Row 3 — Balance: full width (resolve "check balance" intent in <3s) */}
+            <div className="col-12">
+              <BalanceCard privacyMode={privacyMode} />
+            </div>
+
+            {/* Row 4 — Smart Insights (wide) + Upcoming Bills (narrow) */}
             <div className="col-8">
               <SmartInsightsSection />
             </div>
@@ -79,7 +85,7 @@ export default function HomePage() {
               <UpcomingBillsCard privacyMode={privacyMode} />
             </div>
 
-            {/* Row 4 — Accounts (wide) + Savings Goals (narrow) */}
+            {/* Row 5 — Accounts (wide) + Savings Goals (narrow) */}
             <div className="col-8">
               <AccountsSection privacyMode={privacyMode} />
             </div>
