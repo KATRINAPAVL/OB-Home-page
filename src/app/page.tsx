@@ -16,7 +16,6 @@ import SubscriptionsCard from "@/components/SubscriptionsCard";
 import FinancialHealthCard from "@/components/FinancialHealthCard";
 import SecurityCard from "@/components/SecurityCard";
 import NetWorthCard from "@/components/NetWorthCard";
-import ESGCard from "@/components/ESGCard";
 import PromoBanner from "@/components/PromoBanner";
 import BalanceCard from "@/components/BalanceCard";
 import { mockUser, mockDate } from "@/lib/data";
@@ -112,14 +111,11 @@ export default function HomePage() {
               <SecurityCard />
             </div>
 
-            {/* Row 7 — Net Worth (4) + ESG (4) + Promo (4) */}
-            <div className="col-4">
+            {/* Row 7 — Net Worth (6) + Promo (6) */}
+            <div className="col-6">
               <NetWorthCard privacyMode={privacyMode} />
             </div>
-            <div className="col-4">
-              <ESGCard />
-            </div>
-            <div className="col-4">
+            <div className="col-6">
               <PromoBanner />
             </div>
 
