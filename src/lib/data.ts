@@ -50,6 +50,45 @@ export const mockTransactions = [
   { id: "t6", merchant: "Citadele Loan", logo: "🏦", category: "Loan payment", amount: -215.00, date: "20.01.2025" },
 ];
 
+export const mockNeedsAttention = [
+  {
+    id: "at1",
+    type: "order" as const,
+    title: "Payment order in progress",
+    detail: "Transfer to Jānis Bērziņš · €1,250.00",
+    status: "In progress",
+    time: "2h ago",
+    urgent: false,
+  },
+  {
+    id: "at2",
+    type: "message" as const,
+    title: "New message from support",
+    detail: "Your card replacement request has an update",
+    status: "Unread",
+    time: "1h ago",
+    urgent: true,
+  },
+  {
+    id: "at3",
+    type: "order" as const,
+    title: "Standing order awaiting approval",
+    detail: "Monthly rent · €650.00 to Landlord LLC",
+    status: "Awaiting approval",
+    time: "3h ago",
+    urgent: true,
+  },
+  {
+    id: "at4",
+    type: "document" as const,
+    title: "Signature required",
+    detail: "Loan agreement amendment · Deadline 25.04.2026",
+    status: "Action required",
+    time: "Today",
+    urgent: true,
+  },
+];
+
 export const mockNudges = [
   { id: "n1", icon: "📅", title: "Loan payment due in 3 days", body: "Consumer loan payment of €215.00 is due on 01.02.2025.", cta: "Pay now", color: "#e3002c" },
   { id: "n2", icon: "🔍", title: "Unusual charge detected", body: "Wolt charge of €19.90 is 60% higher than your usual average.", cta: "Review", color: "#676973" },
