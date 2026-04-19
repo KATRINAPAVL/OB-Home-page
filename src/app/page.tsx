@@ -13,8 +13,6 @@ import TransactionsCard from "@/components/TransactionsCard";
 import UpcomingBillsCard from "@/components/UpcomingBillsCard";
 import SavingsGoalsCard from "@/components/SavingsGoalsCard";
 import SubscriptionsCard from "@/components/SubscriptionsCard";
-import FinancialHealthCard from "@/components/FinancialHealthCard";
-import SecurityCard from "@/components/SecurityCard";
 import NetWorthCard from "@/components/NetWorthCard";
 import PromoBanner from "@/components/PromoBanner";
 import BalanceCard from "@/components/BalanceCard";
@@ -101,15 +99,9 @@ export default function HomePage() {
               <SubscriptionsCard privacyMode={privacyMode} />
             </div>
 
-            {/* Row 6 — Lending (5) + Financial Health (4) + Security (3) */}
-            <div className="col-5">
+            {/* Row 6 — Lending: full width */}
+            <div className="col-12">
               <ConsumerLoanSection privacyMode={privacyMode} />
-            </div>
-            <div className="col-4">
-              <FinancialHealthCard />
-            </div>
-            <div className="col-3">
-              <SecurityCard />
             </div>
 
             {/* Row 7 — Net Worth (4) + C REWARDS (4) + Promo (4) */}
