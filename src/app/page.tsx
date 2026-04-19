@@ -1,25 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import TopBar from "@/components/TopBar";
 import CommandBar from "@/components/CommandBar";
-import HeroCard from "@/components/HeroCard";
-import NudgeCard from "@/components/NudgeCard";
-import UpcomingBillsCard from "@/components/UpcomingBillsCard";
-import SavingsGoalsCard from "@/components/SavingsGoalsCard";
-import SubscriptionCard from "@/components/SubscriptionCard";
-import SecurityCard from "@/components/SecurityCard";
-import FinancialHealthCard from "@/components/FinancialHealthCard";
-import ESGCard from "@/components/ESGCard";
-import TransactionsCard from "@/components/TransactionsCard";
-import WealthCard from "@/components/WealthCard";
-import { mockUser } from "@/lib/data";
+import QuickActions from "@/components/QuickActions";
+import HighlightsCarousel from "@/components/HighlightsCarousel";
+import AccountsSection from "@/components/AccountsSection";
+import SmartInsightsSection from "@/components/SmartInsightsSection";
+import ConsumerLoanSection from "@/components/ConsumerLoanSection";
+import RightColumn from "@/components/RightColumn";
+import PromoBanner from "@/components/PromoBanner";
+import { mockUser, mockDate } from "@/lib/data";
 
 export default function HomePage() {
   const [privacyMode, setPrivacyMode] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
 
-  // ⌘K global shortcut
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -32,117 +29,102 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
-      <Header
-        privacyMode={privacyMode}
-        onTogglePrivacy={() => setPrivacyMode((v) => !v)}
-        onOpenCommand={() => setCommandOpen(true)}
-        notificationCount={3}
-      />
+    <div style={{ display: "flex", minHeight: "100vh", background: "var(--bg)" }}>
+      {/* Left Sidebar */}
+      <Sidebar />
 
+      {/* Main area */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+        {/* Sticky top bar */}
+        <TopBar
+          privacyMode={privacyMode}
+          onTogglePrivacy={() => setPrivacyMode((v) => !v)}
+          onOpenCommand={() => setCommandOpen(true)}
+        />
+
+        {/* Page content */}
+        <main style={{ flex: 1, padding: "20px 24px 40px", maxWidth: 1200 }}>
+
+          {/* Greeting */}
+          <div style={{ marginBottom: 16 }}>
+            <h1 style={{ fontSize: 22, fontWeight: 500, color: "var(--text-primary)", marginBottom: 2 }}>
+              Greetings, {mockUser.name}
+            </h1>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)" }}>
+              Date and time at the Bank: {mockDate}
+            </p>
+          </div>
+
+          {/* Quick actions */}
+          <QuickActions />
+
+          {/* Highlights */}
+          <HighlightsCarousel />
+
+          {/* Smart Insights (2026 addition, styled as Citadele section) */}
+          <SmartInsightsSection />
+
+          {/* Two-column layout */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 1.2fr) minmax(0, 1fr)",
+            gap: 14,
+            alignItems: "start",
+          }}>
+            {/* Left column */}
+            <div>
+              <AccountsSection privacyMode={privacyMode} />
+              <ConsumerLoanSection privacyMode={privacyMode} />
+            </div>
+
+            {/* Right column */}
+            <RightColumn privacyMode={privacyMode} />
+          </div>
+
+          {/* Promo banner */}
+          <PromoBanner />
+        </main>
+
+        {/* Footer */}
+        <footer style={{
+          borderTop: "1px solid var(--border)",
+          background: "var(--white)",
+          padding: "14px 24px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 6,
+        }}>
+          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center" }}>
+            {["Price list", "Help", "Site map", "Currency converter", "Exchange rates"].map((link) => (
+              <span key={link} className="link-red" style={{ fontSize: 13 }}>{link}</span>
+            ))}
+          </div>
+          <p style={{ fontSize: 12, color: "var(--text-muted)" }}>
+            © Akciju sabiedrība "Citadele banka"
+          </p>
+        </footer>
+      </div>
+
+      {/* Command bar */}
       <CommandBar open={commandOpen} onClose={() => setCommandOpen(false)} />
 
-      <main
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "28px 24px 60px",
-        }}
-      >
-        {/* Greeting */}
-        <div style={{ marginBottom: 24 }}>
-          <h1
-            style={{
-              fontSize: 26,
-              fontWeight: 800,
-              color: "var(--text-primary)",
-              letterSpacing: "-0.02em",
-              marginBottom: 4,
-            }}
-          >
-            Good morning, {mockUser.firstName} 👋
-          </h1>
-          <p style={{ fontSize: 14, color: "var(--text-secondary)" }}>
-            Here's your financial overview for today.
-          </p>
-        </div>
-
-        {/* === BENTO GRID === */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(12, 1fr)",
-            gap: 16,
-          }}
-        >
-          {/* Hero — full width */}
-          <div style={{ gridColumn: "1 / -1" }}>
-            <HeroCard privacyMode={privacyMode} />
-          </div>
-
-          {/* Row 2: Nudge (5) + Upcoming Bills (7) */}
-          <div style={{ gridColumn: "span 5" }}>
-            <NudgeCard />
-          </div>
-          <div style={{ gridColumn: "span 7" }}>
-            <UpcomingBillsCard privacyMode={privacyMode} />
-          </div>
-
-          {/* Row 3: Savings Goals (7) + Subscriptions (5) */}
-          <div style={{ gridColumn: "span 7" }}>
-            <SavingsGoalsCard privacyMode={privacyMode} />
-          </div>
-          <div style={{ gridColumn: "span 5" }}>
-            <SubscriptionCard privacyMode={privacyMode} />
-          </div>
-
-          {/* Row 4: Security (4) + Financial Health (4) + ESG (4) */}
-          <div style={{ gridColumn: "span 4" }}>
-            <SecurityCard />
-          </div>
-          <div style={{ gridColumn: "span 4" }}>
-            <FinancialHealthCard />
-          </div>
-          <div style={{ gridColumn: "span 4" }}>
-            <ESGCard />
-          </div>
-
-          {/* Row 5: Transactions (8) + Net Worth (4) */}
-          <div style={{ gridColumn: "span 8" }}>
-            <TransactionsCard privacyMode={privacyMode} />
-          </div>
-          <div style={{ gridColumn: "span 4" }}>
-            <WealthCard privacyMode={privacyMode} />
-          </div>
-        </div>
-      </main>
-
-      {/* Privacy mode banner */}
+      {/* Privacy mode toast */}
       {privacyMode && (
         <div
           className="fade-in"
           style={{
-            position: "fixed",
-            bottom: 20,
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "rgba(79,142,247,0.15)",
-            border: "1px solid rgba(79,142,247,0.4)",
-            borderRadius: 999,
-            padding: "8px 20px",
-            fontSize: 13,
-            color: "var(--accent)",
-            fontWeight: 600,
-            backdropFilter: "blur(8px)",
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            zIndex: 30,
+            position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
+            background: "var(--banner-dark)", border: "1px solid rgba(227,0,44,0.3)",
+            borderRadius: 999, padding: "8px 20px",
+            fontSize: 13, color: "#fff", fontWeight: 500,
+            display: "flex", alignItems: "center", gap: 8, zIndex: 30,
+            boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
           }}
         >
           🔒 Privacy Mode active — all balances are hidden
         </div>
       )}
-    </>
+    </div>
   );
 }

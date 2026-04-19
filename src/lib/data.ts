@@ -1,131 +1,129 @@
 export const mockUser = {
-  name: "Alexandra",
-  firstName: "Alexandra",
-  avatar: "AK",
-  tier: "Private",
+  name: "Name Surname",
+  firstName: "Name",
 };
 
+export const mockDate = "26.01.2025 14:32";
+
 export const mockAccounts = [
-  { id: "1", name: "Current Account", balance: 12450.80, currency: "£", iban: "GB29 NWBK 6016 1331 9268 19" },
-  { id: "2", name: "Savings Pot", balance: 8200.00, currency: "£", iban: "" },
-  { id: "3", name: "Investment ISA", balance: 24300.50, currency: "£", iban: "" },
+  {
+    id: "a1",
+    name: "X smart",
+    iban: "LV28CITI0000000000001",
+    balance: 2405.37,
+    available: 2405.37,
+    cards: ["X smart: JĀNIS BĒRZIŅŠ", "Visa X prime: JĀNIS BĒRZIŅŠ", "Ring: JĀNIS BĒRZIŅŠ"],
+  },
+  {
+    id: "a2",
+    name: "Alga un uzkrājumi",
+    iban: "LV28CITI0000000000002",
+    balance: 0.66,
+    available: 0.66,
+    cards: ["X smart: JANA PLACACE"],
+  },
 ];
 
-export const mockNetWorth = {
-  total: 48750.30,
-  change: 1240.50,
-  changePercent: 2.61,
-  breakdown: [
-    { label: "Current & Savings", value: 20650.80, color: "#4f8ef7" },
-    { label: "Investments", value: 24300.50, color: "#22d3a3" },
-    { label: "External (Open Banking)", value: 6200.00, color: "#a855f7" },
-    { label: "Liabilities", value: -2401.00, color: "#ef4444" },
+export const mockLoans = {
+  totalAmount: 14200.00,
+  items: [
+    { name: "Consumer loan", remaining: 8_450.00, nextPayment: 215.00, date: "01.02.2025" },
+    { name: "Mortgage", remaining: 5_750.00, nextPayment: 312.00, date: "01.02.2025" },
   ],
 };
 
+export const mockDeposits = {
+  items: [],
+};
+
+export const mockSavingsGoals = [
+  { id: "g1", name: "Holiday ✈️", current: 2820, target: 3600, deadline: "Jul 2025", color: "#e3002c" },
+  { id: "g2", name: "Emergency fund 🛡️", current: 5000, target: 10000, deadline: "Dec 2025", color: "#676973" },
+];
+
 export const mockTransactions = [
-  { id: "t1", merchant: "Starbucks", logo: "☕", category: "Food & Drink", amount: -4.50, date: "Today, 09:14", type: "debit" },
-  { id: "t2", merchant: "ASOS", logo: "👗", category: "Shopping", amount: -67.00, date: "Yesterday", type: "debit" },
-  { id: "t3", merchant: "Salary — TechCorp Ltd", logo: "💼", category: "Income", amount: 3800.00, date: "Apr 18", type: "credit" },
-  { id: "t4", merchant: "Uber Eats", logo: "🛵", category: "Food & Drink", amount: -28.40, date: "Apr 17", type: "debit" },
-  { id: "t5", merchant: "Netflix", logo: "🎬", category: "Entertainment", amount: -15.99, date: "Apr 16", type: "debit" },
-  { id: "t6", merchant: "Waitrose", logo: "🛒", category: "Groceries", amount: -84.20, date: "Apr 15", type: "debit" },
-  { id: "t7", merchant: "Apple Pay", logo: "🍎", category: "Shopping", amount: -12.99, date: "Apr 14", type: "debit" },
-  { id: "t8", merchant: "Revolut Transfer", logo: "💸", category: "Transfer", amount: -250.00, date: "Apr 13", type: "debit" },
+  { id: "t1", merchant: "Rimi", logo: "🛒", category: "Groceries", amount: -42.18, date: "Today 09:14" },
+  { id: "t2", merchant: "Maxima", logo: "🛒", category: "Groceries", amount: -18.45, date: "Yesterday" },
+  { id: "t3", merchant: "Salary — Employer Ltd", logo: "💼", category: "Income", amount: 2400.00, date: "25.01.2025" },
+  { id: "t4", merchant: "Wolt", logo: "🛵", category: "Food & Drink", amount: -19.90, date: "24.01.2025" },
+  { id: "t5", merchant: "Netflix", logo: "🎬", category: "Entertainment", amount: -15.99, date: "23.01.2025" },
+  { id: "t6", merchant: "Citadele Loan", logo: "🏦", category: "Loan payment", amount: -215.00, date: "20.01.2025" },
 ];
 
 export const mockNudges = [
-  {
-    id: "n1",
-    type: "warning",
-    icon: "📅",
-    title: "Rent due in 3 days",
-    body: "£950 to Landlord Properties Ltd — ensure funds are available.",
-    cta: "Review",
-    color: "#f59e0b",
-  },
-  {
-    id: "n2",
-    type: "alert",
-    icon: "🔍",
-    title: "Unusual charge detected",
-    body: "Uber Eats was £28.40 — 78% higher than your usual £16 average.",
-    cta: "Dismiss",
-    color: "#ef4444",
-  },
-  {
-    id: "n3",
-    type: "info",
-    icon: "🎯",
-    title: "Holiday Fund is 78% complete",
-    body: "Just £780 more to hit your £3,600 target by July.",
-    cta: "Top Up",
-    color: "#22d3a3",
-  },
+  { id: "n1", icon: "📅", title: "Loan payment due in 3 days", body: "Consumer loan payment of €215.00 is due on 01.02.2025.", cta: "Pay now", color: "#e3002c" },
+  { id: "n2", icon: "🔍", title: "Unusual charge detected", body: "Wolt charge of €19.90 is 60% higher than your usual average.", cta: "Review", color: "#676973" },
+  { id: "n3", icon: "🎯", title: "Holiday fund at 78%", body: "€780 more to reach your €3,600 holiday goal by July.", cta: "Top up", color: "#e3002c" },
 ];
 
 export const mockUpcomingBills = [
-  { id: "b1", name: "Netflix", logo: "🎬", amount: 15.99, daysLeft: 2, category: "Entertainment" },
-  { id: "b2", name: "Rent", logo: "🏠", amount: 950.00, daysLeft: 3, category: "Housing" },
-  { id: "b3", name: "Spotify", logo: "🎵", amount: 9.99, daysLeft: 7, category: "Entertainment" },
-  { id: "b4", name: "AWS", logo: "☁️", amount: 42.30, daysLeft: 10, category: "Software" },
-];
-
-export const mockSavingsGoals = [
-  { id: "g1", name: "Holiday Fund", emoji: "✈️", current: 2820, target: 3600, deadline: "Jul 2026", color: "#4f8ef7" },
-  { id: "g2", name: "Emergency Buffer", emoji: "🛡️", current: 5000, target: 10000, deadline: "Dec 2026", color: "#22d3a3" },
-  { id: "g3", name: "New MacBook", emoji: "💻", current: 800, target: 2400, deadline: "Sep 2026", color: "#a855f7" },
+  { id: "b1", name: "Netflix", logo: "🎬", amount: 15.99, daysLeft: 2 },
+  { id: "b2", name: "Loan payment", logo: "🏦", amount: 215.00, daysLeft: 3 },
+  { id: "b3", name: "Spotify", logo: "🎵", amount: 9.99, daysLeft: 7 },
 ];
 
 export const mockSubscriptions = [
-  { id: "s1", name: "Netflix", logo: "🎬", amount: 15.99, frequency: "monthly", lastUsed: "2 days ago", active: true },
-  { id: "s2", name: "Spotify", logo: "🎵", amount: 9.99, frequency: "monthly", lastUsed: "Today", active: true },
-  { id: "s3", name: "Adobe CC", logo: "🎨", amount: 54.99, frequency: "monthly", lastUsed: "68 days ago", active: true },
-  { id: "s4", name: "Gym", logo: "💪", amount: 35.00, frequency: "monthly", lastUsed: "71 days ago", active: true },
-  { id: "s5", name: "Dropbox", logo: "📦", amount: 11.99, frequency: "monthly", lastUsed: "Today", active: true },
-  { id: "s6", name: "Apple One", logo: "🍎", amount: 28.95, frequency: "monthly", lastUsed: "Yesterday", active: true },
+  { id: "s1", name: "Netflix", logo: "🎬", amount: 15.99, lastUsed: "2 days ago", unused: false },
+  { id: "s2", name: "Spotify", logo: "🎵", amount: 9.99, lastUsed: "Today", unused: false },
+  { id: "s3", name: "Adobe CC", logo: "🎨", amount: 54.99, lastUsed: "68 days ago", unused: true },
+  { id: "s4", name: "Gym", logo: "💪", amount: 35.00, lastUsed: "71 days ago", unused: true },
+  { id: "s5", name: "Dropbox", logo: "📦", amount: 11.99, lastUsed: "Today", unused: false },
 ];
 
-export const mockSecurity = {
-  score: 87,
-  twoFa: true,
-  biometric: true,
-  deviceCount: 2,
-  lastLogin: "Today, 08:42",
-  status: "Strong",
-};
+export const mockSecurity = { score: 87, twoFa: true, biometric: true, status: "Strong" };
 
 export const mockFinancialHealth = {
   score: 82,
   change: 3,
   creditScore: 742,
-  creditMax: 999,
-  creditLabel: "Good",
   pillars: [
-    { name: "Spending", score: 78, color: "#4f8ef7" },
-    { name: "Savings", score: 85, color: "#22d3a3" },
-    { name: "Bills", score: 95, color: "#a855f7" },
-    { name: "Credit", score: 74, color: "#f59e0b" },
+    { name: "Spending", score: 78 },
+    { name: "Savings", score: 85 },
+    { name: "Bills", score: 95 },
+    { name: "Credit", score: 74 },
   ],
 };
 
-export const mockESG = {
-  carbonKg: 48,
-  carbonBudgetKg: 80,
-  changeVsLastMonth: -12,
-  topCategories: [
-    { name: "Transport", kg: 18, color: "#ef4444" },
-    { name: "Food", kg: 14, color: "#f59e0b" },
-    { name: "Shopping", kg: 10, color: "#a855f7" },
-    { name: "Utilities", kg: 6, color: "#4f8ef7" },
+export const mockESG = { carbonKg: 48, budget: 80, changeVsLast: -12 };
+
+export const mockNetWorth = {
+  total: 7420.66,
+  change: 312.50,
+  breakdown: [
+    { label: "Accounts", value: 2406.03 },
+    { label: "Savings", value: 7820.00 },
+    { label: "Loan balance", value: -14200.00, negative: true },
+    { label: "Investments", value: 11394.63 },
   ],
 };
+
+export const highlights = [
+  { id: "h1", tag: "⚠️", title: "Your ID document has expired", type: "alert", color: "#e3002c" },
+  { id: "h2", tag: "⚠️", title: "Please update your client's questionnaire", type: "warning", color: "#f59e0b" },
+  { id: "h3", tag: "ℹ️", title: "Planned IT system upgrades", type: "info", color: "#676973" },
+  { id: "h4", image: true, title: "Mortgage loan offer for Latvian Families of Honour", type: "promo" },
+  { id: "h5", image: true, title: "New! C smart NEON", type: "promo" },
+  { id: "h6", image: true, title: "Bill protection insurance", type: "promo" },
+];
 
 export const commandSuggestions = [
-  { icon: "🔍", text: "Show Uber charges this month" },
-  { icon: "💸", text: "Transfer £100 to savings" },
-  { icon: "📊", text: "How much did I spend on food?" },
-  { icon: "📅", text: "When does my salary arrive?" },
-  { icon: "🔐", text: "Review security settings" },
-  { icon: "❌", text: "Cancel a subscription" },
+  { icon: "🔍", text: "Search transactions" },
+  { icon: "💸", text: "Make a new payment" },
+  { icon: "📊", text: "View spending this month" },
+  { icon: "💳", text: "Order a new card" },
+  { icon: "🏦", text: "Open a savings account" },
+  { icon: "❌", text: "Manage subscriptions" },
+];
+
+export const navItems = [
+  { label: "Home", icon: "🏠", active: true },
+  { label: "Accounts and Cards", icon: "💳" },
+  { label: "Payments", icon: "↑" },
+  { label: "Lending and Leasing", icon: "📋" },
+  { label: "Savings", icon: "💰" },
+  { label: "Investments", icon: "📈" },
+  { label: "Insurance", icon: "🛡️" },
+  { label: "Pension", icon: "🏛️" },
+  { label: "My profile", icon: "👤" },
+  { label: "Activity History", icon: "📄" },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Search, X, ArrowRight } from "lucide-react";
+import { Search } from "lucide-react";
 import { commandSuggestions } from "@/lib/data";
 
 interface CommandBarProps {
@@ -23,21 +23,15 @@ export default function CommandBar({ open, onClose }: CommandBarProps) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        if (!open) onClose();
-      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [open, onClose]);
+  }, [onClose]);
 
   if (!open) return null;
 
   const filtered = query
-    ? commandSuggestions.filter((s) =>
-        s.text.toLowerCase().includes(query.toLowerCase())
-      )
+    ? commandSuggestions.filter((s) => s.text.toLowerCase().includes(query.toLowerCase()))
     : commandSuggestions;
 
   return (
@@ -45,140 +39,87 @@ export default function CommandBar({ open, onClose }: CommandBarProps) {
       className="fade-in"
       onClick={onClose}
       style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.65)",
-        backdropFilter: "blur(6px)",
+        position: "fixed", inset: 0,
+        background: "rgba(21,23,28,0.45)",
+        backdropFilter: "blur(3px)",
         zIndex: 100,
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
-        paddingTop: 100,
+        paddingTop: 80,
       }}
     >
       <div
         className="slide-in"
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: "var(--surface)",
-          border: "1px solid rgba(79,142,247,0.35)",
-          borderRadius: 18,
+          background: "var(--white)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius-md)",
           width: "100%",
-          maxWidth: 600,
+          maxWidth: 560,
           overflow: "hidden",
-          boxShadow: "0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(79,142,247,0.1)",
+          boxShadow: "0 8px 32px rgba(21,23,28,0.15)",
           margin: "0 16px",
         }}
       >
-        {/* Search input */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            padding: "16px 20px",
-            borderBottom: "1px solid var(--border)",
-          }}
-        >
-          <Search size={18} color="var(--accent)" />
+        {/* Input */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 16px", borderBottom: "1px solid var(--border)" }}>
+          <Search size={16} color="var(--red)" />
           <input
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder='Try "Show Uber charges" or "Transfer to savings"…'
+            placeholder='Search transactions, features, actions…'
             style={{
-              flex: 1,
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              fontSize: 16,
-              color: "var(--text-primary)",
-              fontFamily: "inherit",
+              flex: 1, background: "transparent", border: "none", outline: "none",
+              fontSize: 15, color: "var(--text-primary)", fontFamily: "inherit",
             }}
           />
-          {query && (
-            <button
-              onClick={() => setQuery("")}
-              style={{
-                background: "var(--surface-3)",
-                border: "none",
-                borderRadius: 6,
-                padding: "4px 8px",
-                cursor: "pointer",
-                color: "var(--text-secondary)",
-                fontSize: 12,
-              }}
-            >
-              Clear
-            </button>
-          )}
           <button
             onClick={onClose}
             style={{
-              background: "var(--surface-3)",
-              border: "none",
-              borderRadius: 6,
-              padding: "4px 8px",
-              cursor: "pointer",
-              color: "var(--text-secondary)",
-              fontSize: 12,
-              fontFamily: "monospace",
+              background: "var(--bg)", border: "1px solid var(--border)",
+              borderRadius: "var(--radius)", padding: "3px 8px",
+              cursor: "pointer", color: "var(--text-secondary)", fontSize: 11, fontFamily: "monospace",
             }}
           >
             Esc
           </button>
         </div>
 
-        {/* Suggestions */}
-        <div style={{ padding: "8px 0", maxHeight: 320, overflowY: "auto" }}>
+        {/* Results */}
+        <div style={{ maxHeight: 300, overflowY: "auto" }}>
           {filtered.length === 0 ? (
-            <div style={{ padding: "24px", textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>
+            <div style={{ padding: 20, textAlign: "center", color: "var(--text-muted)", fontSize: 13 }}>
               No results for "{query}"
             </div>
           ) : (
             filtered.map((s, i) => (
-              <button
+              <div
                 key={i}
                 style={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  padding: "12px 20px",
-                  background: "transparent",
-                  border: "none",
-                  cursor: "pointer",
-                  color: "var(--text-primary)",
-                  fontSize: 14,
-                  textAlign: "left",
-                  transition: "background 0.15s",
+                  display: "flex", alignItems: "center", gap: 12,
+                  padding: "11px 16px",
+                  cursor: "pointer", fontSize: 14, color: "var(--text-primary)",
+                  transition: "background 0.1s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-2)")}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bg)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
               >
-                <span style={{ fontSize: 18, width: 24, textAlign: "center" }}>{s.icon}</span>
-                <span style={{ flex: 1 }}>{s.text}</span>
-                <ArrowRight size={14} color="var(--text-muted)" />
-              </button>
+                <span style={{ fontSize: 17, width: 22, textAlign: "center" }}>{s.icon}</span>
+                <span>{s.text}</span>
+                <svg style={{ marginLeft: "auto" }} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </div>
             ))
           )}
         </div>
 
-        {/* Footer hint */}
-        <div
-          style={{
-            padding: "10px 20px",
-            borderTop: "1px solid var(--border)",
-            display: "flex",
-            gap: 16,
-            fontSize: 11,
-            color: "var(--text-muted)",
-          }}
-        >
-          <span>↑↓ Navigate</span>
-          <span>↵ Select</span>
-          <span>Esc Close</span>
-          <span style={{ marginLeft: "auto" }}>Powered by AI ✦</span>
+        <div style={{ padding: "8px 16px", borderTop: "1px solid var(--border)", display: "flex", gap: 16, fontSize: 11, color: "var(--text-muted)" }}>
+          <span>↑↓ Navigate</span><span>↵ Select</span><span>Esc Close</span>
+          <span style={{ marginLeft: "auto" }}>AI-powered search</span>
         </div>
       </div>
     </div>
