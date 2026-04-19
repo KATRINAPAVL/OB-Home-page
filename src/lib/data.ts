@@ -97,14 +97,6 @@ export const mockNetWorth = {
   ],
 };
 
-export const highlights = [
-  { id: "h1", tag: "⚠️", title: "Your ID document has expired", type: "alert", color: "#e3002c" },
-  { id: "h2", tag: "⚠️", title: "Please update your client's questionnaire", type: "warning", color: "#f59e0b" },
-  { id: "h3", tag: "ℹ️", title: "Planned IT system upgrades", type: "info", color: "#676973" },
-  { id: "h4", image: true, title: "Mortgage loan offer for Latvian Families of Honour", type: "promo" },
-  { id: "h5", image: true, title: "New! C smart NEON", type: "promo" },
-  { id: "h6", image: true, title: "Bill protection insurance", type: "promo" },
-];
 
 export const commandSuggestions = [
   { icon: "🔍", text: "Search transactions" },
